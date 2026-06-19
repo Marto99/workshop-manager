@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Нова задача</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container narrow">
+    <section class="form-card">
+        <h1>Нова задача</h1>
+
+        <form th:action="@{/tasks}" th:object="${taskForm}" method="post" class="form">
+            <label>
+                Заглавие
+                <input type="text" th:field="*{title}">
+                <span class="field-error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></span>
+            </label>
+
+            <label>
+                Описание
+                <textarea rows="5" th:field="*{description}"></textarea>
+                <span class="field-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+            </label>
+
+            <label>
+                Техник
+                <select th:field="*{assignedToId}">
+                    <option value="">Избери техник</option>
+                    <option th:each="tech : ${technicians}" th:value="${tech.id}" th:text="${tech.fullName}"></option>
+                </select>
+                <span class="field-error" th:if="${#fields.hasErrors('assignedToId')}" th:errors="*{assignedToId}"></span>
+            </label>
+
+            <label>
+                Приоритет
+                <select th:field="*{priority}">
+                    <option value="">Избери</option>
+                    <option value="LOW">Нисък</option>
+                    <option value="MEDIUM">Среден</option>
+                    <option value="HIGH">Висок</option>
+                </select>
+                <span class="field-error" th:if="${#fields.hasErrors('priority')}" th:errors="*{priority}"></span>
+            </label>
+
+            <div class="form-actions">
+                <a class="btn btn-outline" th:href="@{/tasks}">Назад</a>
+                <button class="btn btn-primary" type="submit">Създай</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

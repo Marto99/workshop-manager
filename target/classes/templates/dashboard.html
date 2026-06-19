@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Табло</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Добре дошъл</p>
+            <h1>Табло</h1>
+            <p class="muted">Бърз преглед на активността в работилницата.</p>
+        </div>
+    </section>
+
+    <section class="stats-grid">
+        <article class="stat-card">
+            <span class="stat-label">Оборудване</span>
+            <strong th:text="${equipmentCount}">0</strong>
+        </article>
+        <article class="stat-card">
+            <span class="stat-label">Активни резервации</span>
+            <strong th:text="${activeBookingsCount}">0</strong>
+        </article>
+        <article class="stat-card">
+            <span class="stat-label">Отворени задачи</span>
+            <strong th:text="${openTasksCount}">0</strong>
+        </article>
+        <article class="stat-card">
+            <span class="stat-label">Заявки за поддръжка</span>
+            <strong th:text="${maintenanceCount}">0</strong>
+        </article>
+    </section>
+
+    <section class="cards-grid">
+        <a class="feature-card" th:href="@{/equipment}">
+            <h2>Оборудване</h2>
+            <p>Добавяне, редакция, изтриване и следене на статус.</p>
+        </a>
+        <a class="feature-card" th:href="@{/bookings}">
+            <h2>Резервации</h2>
+            <p>Резервирай техника за конкретна дата и час.</p>
+        </a>
+        <a class="feature-card" th:href="@{/tasks}">
+            <h2>Задачи</h2>
+            <p>Разпределяй работа към техници.</p>
+        </a>
+        <a class="feature-card" th:href="@{/maintenance}">
+            <h2>Поддръжка</h2>
+            <p>Регистрирай проблеми и ремонти.</p>
+        </a>
+    </section>
+</main>
+</body>
+</html>

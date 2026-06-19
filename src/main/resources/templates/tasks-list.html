@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачи</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Role check</p>
+            <h1>Задачи</h1>
+            <p class="muted">Мениджърът създава задачи, техниците ги изпълняват.</p>
+        </div>
+        <a class="btn btn-primary" th:href="@{/tasks/new}" th:if="${session.userRole == 'MANAGER'}">+ Нова задача</a>
+    </section>
+
+    <section class="kanban">
+        <article class="task-card" th:each="task : ${tasks}">
+            <div class="task-top">
+                <span class="badge" th:text="${task.status}">OPEN</span>
+                <span class="priority" th:text="${task.priority}">HIGH</span>
+            </div>
+            <h2 th:text="${task.title}">Смяна на дюза</h2>
+            <p th:text="${task.description}">Описание...</p>
+            <p class="muted">Към: <span th:text="${task.assignedTo.fullName}">Техник</span></p>
+
+            <div class="actions">
+                <form th:action="@{/tasks/{id}/start(id=${task.id})}" method="post" th:if="${session.userRole == 'TECHNICIAN'}">
+                    <button class="btn btn-small" type="submit">Започни</button>
+                </form>
+                <form th:action="@{/tasks/{id}/complete(id=${task.id})}" method="post" th:if="${session.userRole == 'TECHNICIAN'}">
+                    <button class="btn btn-small btn-primary" type="submit">Завърши</button>
+                </form>
+                <form th:action="@{/tasks/{id}/delete(id=${task.id})}" method="post" th:if="${session.userRole == 'MANAGER'}">
+                    <button class="btn btn-small btn-danger" type="submit">Изтрий</button>
+                </form>
+            </div>
+        </article>
+
+        <p class="empty" th:if="${#lists.isEmpty(tasks)}">Няма задачи.</p>
+    </section>
+</main>
+</body>
+</html>

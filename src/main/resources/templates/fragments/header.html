@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="site-header" th:fragment="header">
+    <a class="brand" th:href="@{/}">
+        <span class="brand-mark">SW</span>
+        <span>Smart Workshop</span>
+    </a>
+
+    <nav class="nav" th:if="${session.userId == null}">
+        <a class="nav-link" th:href="@{/login}">Вход</a>
+        <a class="btn btn-primary" th:href="@{/register}">Регистрация</a>
+    </nav>
+
+    <nav class="nav" th:if="${session.userId != null}">
+        <a class="nav-link" th:href="@{/dashboard}">Табло</a>
+        <a class="nav-link" th:href="@{/equipment}">Оборудване</a>
+        <a class="nav-link" th:href="@{/bookings}">Резервации</a>
+        <a class="nav-link" th:href="@{/tasks}">Задачи</a>
+        <a class="nav-link" th:href="@{/maintenance}">Поддръжка</a>
+        <form th:action="@{/logout}" method="post" class="logout-form">
+            <button class="btn btn-danger" type="submit">Logout</button>
+        </form>
+    </nav>
+</header>
+</body>
+</html>

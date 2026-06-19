@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Поддръжка</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Сервизни заявки</p>
+            <h1>Поддръжка</h1>
+            <p class="muted">Докладване и затваряне на проблеми с оборудването.</p>
+        </div>
+        <a class="btn btn-primary" th:href="@{/maintenance/new}">+ Нова заявка</a>
+    </section>
+
+    <section class="cards-list">
+        <article class="list-card" th:each="request : ${maintenanceRequests}">
+            <div>
+                <h2 th:text="${request.equipment.name}">Лазерен резач</h2>
+                <p th:text="${request.description}">Описание на проблема</p>
+                <span class="badge" th:text="${request.status}">OPEN</span>
+            </div>
+
+            <form th:action="@{/maintenance/{id}/resolve(id=${request.id})}" method="post" th:if="${session.userRole == 'TECHNICIAN'}">
+                <button class="btn btn-primary" type="submit">Маркирай като решена</button>
+            </form>
+        </article>
+
+        <p class="empty" th:if="${#lists.isEmpty(maintenanceRequests)}">Няма заявки за поддръжка.</p>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Нова заявка за поддръжка</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container narrow">
+    <section class="form-card">
+        <h1>Нова заявка за поддръжка</h1>
+
+        <form th:action="@{/maintenance}" th:object="${maintenanceForm}" method="post" class="form">
+            <label>
+                Оборудване
+                <select th:field="*{equipmentId}">
+                    <option value="">Избери оборудване</option>
+                    <option th:each="item : ${equipment}" th:value="${item.id}" th:text="${item.name}"></option>
+                </select>
+                <span class="field-error" th:if="${#fields.hasErrors('equipmentId')}" th:errors="*{equipmentId}"></span>
+            </label>
+
+            <label>
+                Описание на проблема
+                <textarea rows="5" th:field="*{description}" placeholder="Какъв е проблемът?"></textarea>
+                <span class="field-error" th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span>
+            </label>
+
+            <label>
+                Спешност
+                <select th:field="*{urgency}">
+                    <option value="">Избери</option>
+                    <option value="LOW">Ниска</option>
+                    <option value="MEDIUM">Средна</option>
+                    <option value="HIGH">Висока</option>
+                </select>
+                <span class="field-error" th:if="${#fields.hasErrors('urgency')}" th:errors="*{urgency}"></span>
+            </label>
+
+            <div class="form-actions">
+                <a class="btn btn-outline" th:href="@{/maintenance}">Назад</a>
+                <button class="btn btn-primary" type="submit">Изпрати</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

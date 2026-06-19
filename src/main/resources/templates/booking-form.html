@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Нова резервация</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container narrow">
+    <section class="form-card">
+        <h1>Нова резервация</h1>
+
+        <form th:action="@{/bookings}" th:object="${bookingForm}" method="post" class="form">
+            <label>
+                Оборудване
+                <select th:field="*{equipmentId}">
+                    <option value="">Избери оборудване</option>
+                    <option th:each="item : ${availableEquipment}"
+                            th:value="${item.id}"
+                            th:text="${item.name + ' - ' + item.location}">
+                    </option>
+                </select>
+                <span class="field-error" th:if="${#fields.hasErrors('equipmentId')}" th:errors="*{equipmentId}"></span>
+            </label>
+
+            <label>
+                Начало
+                <input type="datetime-local" th:field="*{startTime}">
+                <span class="field-error" th:if="${#fields.hasErrors('startTime')}" th:errors="*{startTime}"></span>
+            </label>
+
+            <label>
+                Край
+                <input type="datetime-local" th:field="*{endTime}">
+                <span class="field-error" th:if="${#fields.hasErrors('endTime')}" th:errors="*{endTime}"></span>
+            </label>
+
+            <label>
+                Бележка
+                <textarea th:field="*{note}" rows="4" placeholder="За какво ще се използва?"></textarea>
+                <span class="field-error" th:if="${#fields.hasErrors('note')}" th:errors="*{note}"></span>
+            </label>
+
+            <div class="form-actions">
+                <a class="btn btn-outline" th:href="@{/bookings}">Назад</a>
+                <button class="btn btn-primary" type="submit">Резервирай</button>
+            </div>
+        </form>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="auth-layout">
+    <section class="auth-card">
+        <h1>Вход</h1>
+        <p class="muted">Влез, за да управляваш оборудване, резервации и задачи.</p>
+
+        <div class="alert alert-error" th:if="${loginError}" th:text="${loginError}"></div>
+
+        <form th:action="@{/login}" th:object="${loginRequest}" method="post" class="form">
+            <label>
+                Имейл
+                <input type="email" th:field="*{email}" placeholder="example@mail.com">
+                <span class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+            </label>
+
+            <label>
+                Парола
+                <input type="password" th:field="*{password}" placeholder="Въведи парола">
+                <span class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+            </label>
+
+            <button class="btn btn-primary full" type="submit">Вход</button>
+        </form>
+
+        <p class="small-text">Нямаш профил? <a th:href="@{/register}">Регистрирай се</a></p>
+    </section>
+</main>
+</body>
+</html>

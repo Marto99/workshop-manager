@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Резервации</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Функционалност</p>
+            <h1>Резервации</h1>
+            <p class="muted">Потребителите резервират налично оборудване.</p>
+        </div>
+        <a class="btn btn-primary" th:href="@{/bookings/new}">+ Нова резервация</a>
+    </section>
+
+    <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+
+    <section class="cards-list">
+        <article class="list-card" th:each="booking : ${bookings}">
+            <div>
+                <h2 th:text="${booking.equipment.name}">CNC машина</h2>
+                <p class="muted">
+                    <span th:text="${#temporals.format(booking.startTime, 'dd.MM.yyyy HH:mm')}">20.06.2026 10:00</span>
+                    -
+                    <span th:text="${#temporals.format(booking.endTime, 'HH:mm')}">12:00</span>
+                </p>
+                <span class="badge" th:text="${booking.status}">ACTIVE</span>
+            </div>
+            <form th:action="@{/bookings/{id}/cancel(id=${booking.id})}" method="post">
+                <button class="btn btn-danger" type="submit">Отмени</button>
+            </form>
+        </article>
+
+        <p class="empty" th:if="${#lists.isEmpty(bookings)}">Няма резервации.</p>
+    </section>
+</main>
+</body>
+</html>

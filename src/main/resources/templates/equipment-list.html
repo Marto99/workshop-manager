@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Оборудване</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">CRUD</p>
+            <h1>Оборудване</h1>
+            <p class="muted">Пълен CRUD за основната entity Equipment.</p>
+        </div>
+        <a class="btn btn-primary" th:href="@{/equipment/new}" th:if="${session.userRole == 'MANAGER'}">+ Ново оборудване</a>
+    </section>
+
+    <div class="alert alert-success" th:if="${success}" th:text="${success}"></div>
+
+    <section class="table-card">
+        <table>
+            <thead>
+            <tr>
+                <th>Име</th>
+                <th>Категория</th>
+                <th>Локация</th>
+                <th>Статус</th>
+                <th>Цена/час</th>
+                <th>Действия</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${equipment}">
+                <td th:text="${item.name}">3D принтер</td>
+                <td th:text="${item.category}">Принтиране</td>
+                <td th:text="${item.location}">Лаб 1</td>
+                <td><span class="badge" th:text="${item.status}">AVAILABLE</span></td>
+                <td th:text="${#numbers.formatDecimal(item.hourlyRate, 1, 2)} + ' лв.'">15.00 лв.</td>
+                <td class="actions">
+                    <a class="btn btn-small btn-outline" th:href="@{/equipment/{id}(id=${item.id})}">Детайли</a>
+                    <a class="btn btn-small" th:href="@{/equipment/{id}/edit(id=${item.id})}" th:if="${session.userRole == 'MANAGER'}">Редакция</a>
+                    <form th:action="@{/equipment/{id}/delete(id=${item.id})}" method="post" th:if="${session.userRole == 'MANAGER'}">
+                        <button class="btn btn-small btn-danger" type="submit">Изтрий</button>
+                    </form>
+                </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(equipment)}">
+                <td colspan="6" class="empty">Няма добавено оборудване.</td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
+</body>
+</html>

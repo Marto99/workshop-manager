@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Workshop Manager</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="hero">
+    <section class="hero-content">
+        <p class="eyebrow">Практична Spring MVC система</p>
+        <h1>Управлявай работилница, оборудване и сервизни заявки от едно място.</h1>
+        <p class="lead">
+            Smart Workshop Manager помага на малки сервизи, училищни лаборатории и работилници
+            да следят наличното оборудване, резервациите, задачите и поддръжката.
+        </p>
+
+        <div class="hero-actions" th:if="${session.userId == null}">
+            <a class="btn btn-primary btn-lg" th:href="@{/register}">Започни с регистрация</a>
+            <a class="btn btn-outline btn-lg" th:href="@{/login}">Имам профил</a>
+        </div>
+
+        <div class="hero-actions" th:if="${session.userId != null}">
+            <a class="btn btn-primary btn-lg" th:href="@{/dashboard}">Към таблото</a>
+        </div>
+    </section>
+
+    <section class="hero-card">
+        <h2>Какво покрива проектът?</h2>
+        <ul class="check-list">
+            <li>Session-based login без Spring Security</li>
+            <li>CRUD за оборудване</li>
+            <li>Резервации и сервизни задачи</li>
+            <li>Role checks: MANAGER и TECHNICIAN</li>
+            <li>Валидация и грешки до полетата</li>
+        </ul>
+    </section>
+</main>
+</body>
+</html>
