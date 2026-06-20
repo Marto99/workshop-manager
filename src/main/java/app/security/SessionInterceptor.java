@@ -17,7 +17,7 @@ public class SessionInterceptor implements HandlerInterceptor {
 
     // Endpoints that require MANAGER role (adjust as needed)
     private static final Set<String> MANAGER_ENDPOINTS = Set.of(
-            "/users", "/reports", "/equipment/new", "/tasks/new"
+            "/users", "/reports", "/equipment/new", "/tasks/new", "/worktask/new"
     );
 
     @Override
