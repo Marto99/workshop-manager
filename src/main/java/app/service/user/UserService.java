@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class UserService {
@@ -48,5 +49,12 @@ public class UserService {
         userRepository.save(userEntity);
 
         return UserMapper.toUserDto(userEntity);
+    }
+
+    public UserDto getById(UUID id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("User with [%s] does not exist.".formatted(id)));
+
+        return UserMapper.toUserDto(user);
     }
 }

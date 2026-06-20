@@ -15,17 +15,17 @@
 
         <div class="alert alert-error" th:if="${loginError}" th:text="${loginError}"></div>
 
-        <form th:action="@{/login}" th:object="${loginRequest}" method="post" class="form">
+        <form th:action="@{/login}" th:object="${userLoginRequest}" th:method="post" class="form">
             <label>
                 Имейл
                 <input type="email" th:field="*{email}" placeholder="example@mail.com">
-                <span class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
             </label>
 
             <label>
                 Парола
                 <input type="password" th:field="*{password}" placeholder="Въведи парола">
-                <span class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                <p class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </label>
 
             <button class="btn btn-primary full" type="submit">Вход</button>

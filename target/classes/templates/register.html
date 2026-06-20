@@ -13,17 +13,17 @@
         <h1>Регистрация</h1>
         <p class="muted">Създай профил. Паролата трябва да се хешира в backend-а.</p>
 
-        <form th:action="@{/register}" th:object="${registerRequest}" method="post" class="form grid-form">
+        <form th:action="@{/register}" th:object="${userRegisterRequest}" th:method="post" class="form grid-form">
             <label>
                 Име
                 <input type="text" th:field="*{fullName}" placeholder="Иван Иванов">
-                <span class="field-error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></span>
+                <p class="field-error" th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}"></p>
             </label>
 
             <label>
                 Имейл
                 <input type="email" th:field="*{email}" placeholder="ivan@mail.com">
-                <span class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span>
+                <p class="field-error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
             </label>
 
             <label>
@@ -33,13 +33,13 @@
                     <option value="MANAGER">Мениджър</option>
                     <option value="TECHNICIAN">Техник</option>
                 </select>
-                <span class="field-error" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></span>
+                <p class="field-error" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></p>
             </label>
 
             <label>
                 Парола
-                <input type="password" th:field="*{password}" placeholder="Минимум 6 символа">
-                <span class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span>
+                <input type="password" th:field="*{password}" placeholder="Минимум 8 символа">
+                <p class="field-error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
             </label>
 
             <button class="btn btn-primary full grid-span" type="submit">Създай профил</button>

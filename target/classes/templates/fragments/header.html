@@ -18,7 +18,7 @@
         <a class="nav-link" th:href="@{/bookings}">Резервации</a>
         <a class="nav-link" th:href="@{/tasks}">Задачи</a>
         <a class="nav-link" th:href="@{/maintenance}">Поддръжка</a>
-        <form th:action="@{/logout}" method="post" class="logout-form">
+        <form th:action="@{/logout}" th:method="post" class="logout-form">
             <button class="btn btn-danger" type="submit">Logout</button>
         </form>
     </nav>
