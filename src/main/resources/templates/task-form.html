@@ -12,7 +12,7 @@
     <section class="form-card">
         <h1>Нова задача</h1>
 
-        <form th:action="@{/tasks}" th:object="${taskForm}" method="post" class="form">
+        <form th:action="@{/tasks}" th:object="${taskForm}" th:method="post" class="form">
             <label>
                 Заглавие
                 <input type="text" th:field="*{title}">

@@ -13,7 +13,7 @@
         <h1 th:text="${equipmentForm.id == null ? 'Ново оборудване' : 'Редакция на оборудване'}">Ново оборудване</h1>
 
         <form th:action="${equipmentForm.id == null} ? @{/equipment} : @{/equipment/{id}/edit(id=${equipmentForm.id})}"
-              th:object="${equipmentForm}" method="post" class="form">
+              th:object="${equipmentForm}" th:method="post" class="form">
             <label>
                 Име
                 <input type="text" th:field="*{name}">

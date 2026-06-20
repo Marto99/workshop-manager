@@ -26,10 +26,10 @@
             </div>
             <h2 th:text="${task.title}">Смяна на дюза</h2>
             <p th:text="${task.description}">Описание...</p>
-            <p class="muted">Към: <span th:text="${task.assignedTo.fullName}">Техник</span></p>
+            <p class="muted">Към: <span th:text="${task.assignedToName}">Техник</span></p>
 
             <div class="actions">
-                <form th:action="@{/tasks/{id}/start(id=${task.id})}" method="post" th:if="${session.userRole == 'TECHNICIAN'}">
+                <form th:action="@{/tasks/{id}/start(id=${task.id})}" th:method="post" th:if="${session.userRole == 'TECHNICIAN'}">
                     <button class="btn btn-small" type="submit">Започни</button>
                 </form>
                 <form th:action="@{/tasks/{id}/complete(id=${task.id})}" method="post" th:if="${session.userRole == 'TECHNICIAN'}">

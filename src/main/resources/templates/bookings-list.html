@@ -23,7 +23,7 @@
     <section class="cards-list">
         <article class="list-card" th:each="booking : ${bookings}">
             <div>
-                <h2 th:text="${booking.equipment.name}">CNC машина</h2>
+                <h2 th:text="${booking.equipmentName}">CNC машина</h2>
                 <p class="muted">
                     <span th:text="${#temporals.format(booking.startTime, 'dd.MM.yyyy HH:mm')}">20.06.2026 10:00</span>
                     -
@@ -31,7 +31,7 @@
                 </p>
                 <span class="badge" th:text="${booking.status}">ACTIVE</span>
             </div>
-            <form th:action="@{/bookings/{id}/cancel(id=${booking.id})}" method="post">
+            <form th:action="@{/bookings/{id}/cancel(id=${booking.id})}" th:method="post">
                 <button class="btn btn-danger" type="submit">Отмени</button>
             </form>
         </article>

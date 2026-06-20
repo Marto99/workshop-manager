@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="bg" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${item.name} + ' — Оборудване'">Оборудване</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+<div th:replace="~{fragments/header :: header}"></div>
+
+<main class="container">
+    <section class="page-heading">
+        <div>
+            <p class="eyebrow">Детайли</p>
+            <h1 th:text="${item.name}">Оборудване</h1>
+            <p class="muted" th:text="${item.category}">Категория</p>
+        </div>
+        <a class="btn btn-outline" th:href="@{/equipment}">Назад</a>
+    </section>
+
+    <section class="card">
+        <dl>
+            <dt>Име</dt>
+            <dd th:text="${item.name}">3D принтер</dd>
+
+            <dt>Категория</dt>
+            <dd th:text="${item.category}">Принтиране</dd>
+
+            <dt>Локация</dt>
+            <dd th:text="${item.location}">Лаб 1</dd>
+
+            <dt>Статус</dt>
+            <dd th:text="${item.status}">AVAILABLE</dd>
+
+            <dt>Цена/час</dt>
+            <dd th:text="${#numbers.formatDecimal(item.hourlyRate, 1, 2)} + ' EUR.'">15.00</dd>
+        </dl>
+
+        <div class="form-actions">
+            <a class="btn btn-primary" th:href="@{/equipment/{id}/edit(id=${item.id})}" th:if="${session.userRole == 'MANAGER'}">Редакция</a>
+            <form th:action="@{/equipment/{id}/delete(id=${item.id})}" th:method="post" th:if="${session.userRole == 'MANAGER'}">
+                <button class="btn btn-danger" type="submit">Изтрий</button>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

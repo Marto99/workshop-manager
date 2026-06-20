@@ -38,11 +38,11 @@
                 <td th:text="${item.category}">Принтиране</td>
                 <td th:text="${item.location}">Лаб 1</td>
                 <td><span class="badge" th:text="${item.status}">AVAILABLE</span></td>
-                <td th:text="${#numbers.formatDecimal(item.hourlyRate, 1, 2)} + ' лв.'">15.00 лв.</td>
+                <td th:text="${#numbers.formatDecimal(item.hourlyRate, 1, 2)} + ' EUR.'">15.00 лв.</td>
                 <td class="actions">
                     <a class="btn btn-small btn-outline" th:href="@{/equipment/{id}(id=${item.id})}">Детайли</a>
                     <a class="btn btn-small" th:href="@{/equipment/{id}/edit(id=${item.id})}" th:if="${session.userRole == 'MANAGER'}">Редакция</a>
-                    <form th:action="@{/equipment/{id}/delete(id=${item.id})}" method="post" th:if="${session.userRole == 'MANAGER'}">
+                    <form th:action="@{/equipment/{id}/delete(id=${item.id})}" th:method="post" th:if="${session.userRole == 'MANAGER'}">
                         <button class="btn btn-small btn-danger" type="submit">Изтрий</button>
                     </form>
                 </td>

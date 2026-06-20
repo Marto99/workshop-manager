@@ -21,7 +21,7 @@
     <section class="cards-list">
         <article class="list-card" th:each="request : ${maintenanceRequests}">
             <div>
-                <h2 th:text="${request.equipment.name}">Лазерен резач</h2>
+                <h2 th:text="${request.equipmentName}">Лазерен резач</h2>
                 <p th:text="${request.description}">Описание на проблема</p>
                 <span class="badge" th:text="${request.status}">OPEN</span>
             </div>
