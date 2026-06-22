@@ -1,8 +1,6 @@
 # Workshop Manager
 
-Практична тема: система за управление на малка работилница, сервиз или училищна лаборатория.
-
-## Защо покрива критериите
+Практична тема: система за управление на малка работилница
 
 ### Domain entities
 1. UserAccount - потребител с роля MANAGER или TECHNICIAN.
@@ -11,7 +9,6 @@
 4. WorkTask - задача към техник.
 5. MaintenanceRequest - заявка за поддръжка.
 
-Технически може да добавиш enum-и: UserRole, EquipmentStatus, BookingStatus, TaskStatus, Priority, Urgency.
 
 ### Relationships
 - Booking -> Equipment: ManyToOne
@@ -31,7 +28,7 @@
 3. WorkTask: create task + start + complete + delete.
 4. MaintenanceRequest: create request + resolve request.
 
-### Security без Spring Security
+### Security
 - При успешен login:
     - session.setAttribute("userId", user.getId());
     - session.setAttribute("userRole", user.getRole().name());

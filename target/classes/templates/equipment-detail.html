@@ -33,7 +33,7 @@
             <dd th:text="${item.status}">AVAILABLE</dd>
 
             <dt>Цена/час</dt>
-            <dd th:text="${#numbers.formatDecimal(item.hourlyRate, 1, 2)} + ' лв.'">15.00 лв.</dd>
+            <dd th:text="${#numbers.formatDecimal(item.hourlyRate, 1, 2)} + ' EUR.'">15.00</dd>
         </dl>
 
         <div class="form-actions">

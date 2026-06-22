@@ -11,9 +11,9 @@
 <main class="container">
     <section class="page-heading">
         <div>
-            <p class="eyebrow">Role check</p>
+            <p class="eyebrow">ТВОИТЕ</p>
             <h1>Задачи</h1>
-            <p class="muted">Мениджърът създава задачи, техниците ги изпълняват.</p>
+            <p class="muted">Изпълняват се задачите според техния приоритет.</p>
         </div>
         <a class="btn btn-primary" th:href="@{/tasks/new}" th:if="${session.userRole == 'MANAGER'}">+ Нова задача</a>
     </section>

@@ -11,7 +11,6 @@
 <main class="auth-layout">
     <section class="auth-card wide">
         <h1>Регистрация</h1>
-        <p class="muted">Създай профил. Паролата трябва да се хешира в backend-а.</p>
 
         <form th:action="@{/register}" th:object="${userRegisterRequest}" th:method="post" class="form grid-form">
             <label>
